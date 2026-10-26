@@ -7,7 +7,7 @@ papel: Diseño y desarrollo
 problema: Vendían casitas de madera con un catálogo que no se podía filtrar ni comprar desde el móvil.
 imagen: ./cover.jpg
 imagenAlt: Casita de madera de Balticasa al atardecer, con el logotipo sobre la fachada
-url: https://balticasa.es
+url: https://balticasa.com/
 ---
 
 ## Problema
