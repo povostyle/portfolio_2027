@@ -1,0 +1,47 @@
+---
+/**
+ * Guía de maquetación (≡ templates/page-guia.php en WordPress).
+ * Los patrones viven en src/guide/patterns.json (core/guide en el monorepo) y los
+ * comparten las dos guías. Para añadir uno, editar ese JSON.
+ *
+ * Se publica con noindex. En un proyecto de cliente se puede borrar antes de entregar.
+ */
+import Page from "../layouts/Page.astro";
+import data from "../guide/patterns.json";
+
+const patterns = data.patterns;
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+<Page page="guia" title="Guía de maquetación" noindex>
+  <div class="guide">
+    <section class="section">
+      <div class="container">
+        <div class="grid">
+          <p class="eyebrow span-2">Referencia interna</p>
+          <h1 class="start-3 end-11 md-start-1 md-end-9">Guía de maquetación</h1>
+          <div class="start-3 end-9 md-start-1 md-end-7 u-flow">
+            <p>Patrones con el grid del starter: 4 columnas en móvil, 8 en tablet y 12 en escritorio, a pantalla completa. Pulsa G para ver las columnas y Shift + G para las filas.</p>
+            <p class="body-sm u-text-muted">Reglas: la posición la dan las columnas (start, end, span), nunca max-width. Un bloque solo queda centrado si mide un número par de columnas. Sin prefijo = escritorio · md- = tablet · sm- = móvil. end-N es una línea: start-3 end-11 son las columnas 3 a 10.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {patterns.map((p, i) => (
+      <section class="section guide__pattern" id={`patron-${i + 1}`}>
+        <div class="container">
+          <div class="grid guide__head">
+            <p class="eyebrow span-1">{pad(i + 1)}</p>
+            <h2 class="h4 start-2 end-6 md-start-2 md-end-9">{p.title}</h2>
+            <p class="body-sm u-text-muted start-7 end-12 md-start-2 md-end-9">{p.when}</p>
+          </div>
+          <div class="guide__demo" set:html={p.html} />
+          <details class="guide__code">
+            <summary>Ver código</summary>
+            <pre><code>{p.html}</code></pre>
+          </details>
+        </div>
+      </section>
+    ))}
+  </div>
+</Page>

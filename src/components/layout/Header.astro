@@ -1,0 +1,26 @@
+---
+/** Header. CSS: styles/layout/header.css   JS: scripts/components/header.js */
+import { site } from "../../data/site";
+import { primary } from "../../data/nav";
+import { isCurrent } from "../../lib/url";
+const path = Astro.url.pathname;
+---
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a class="header__logo" href="/" aria-label={site.name}>
+      <span class="h4">{site.name}</span>
+    </a>
+    <nav class="header__nav" aria-label="Principal">
+      {primary.map((item) => (
+        <a class="header__link" data-nav-link href={item.url} aria-current={isCurrent(item.url, path) ? "page" : undefined} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener" : undefined}>
+          {item.title}
+        </a>
+      ))}
+    </nav>
+    <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <span class="menu-toggle__bar"></span>
+      <span class="menu-toggle__bar"></span>
+      <span class="menu-toggle__bar"></span>
+    </button>
+  </div>
+</header>

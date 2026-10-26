@@ -1,0 +1,6 @@
+---
+/** Icono del sprite (≡ bc_icon). Sprite: public/icons/sprite.svg, ids "icon-<nombre>". */
+interface Props { name: string; class?: string }
+const { name, class: className = "" } = Astro.props;
+---
+<svg class:list={["icon", `icon--${name}`, className]} aria-hidden="true" focusable="false"><use href={`/icons/sprite.svg#icon-${name}`}></use></svg>

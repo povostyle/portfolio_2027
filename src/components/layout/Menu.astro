@@ -1,0 +1,12 @@
+---
+/** Menú móvil. CSS: styles/components/menu.css   JS: scripts/components/menu.js */
+import { primary } from "../../data/nav";
+import { isCurrent } from "../../lib/url";
+---
+<nav class="menu" id="menu" data-menu aria-label="Menú móvil">
+  <ul class="menu__list" role="list" data-menu-list>
+    {primary.map((item) => (
+      <li><a class="menu__link" data-nav-link href={item.url} aria-current={isCurrent(item.url, Astro.url.pathname) ? "page" : undefined}>{item.title}</a></li>
+    ))}
+  </ul>
+</nav>

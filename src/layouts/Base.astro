@@ -1,0 +1,47 @@
+---
+/**
+ * <html>, <head> y el arranque del JS. ≡ header.php + footer.php en WordPress.
+ * No tiene cabecera ni pie visibles: eso es Page.astro.
+ *
+ * - En desarrollo pone data-grid-overlay en <html> → botón del grid y tecla G.
+ * - #swup es el contenedor que Swup sustituye al navegar.
+ * - <Font>: fuentes de astro.config.mjs (experimental.fonts). Una línea por cssVariable configurada.
+ */
+import { Font } from "astro:assets";
+import Head from "@components/seo/Head.astro";
+import { site } from "@data/site";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  page: string; // valor de data-page: activa CSS de pages/ y JS de scripts/pages/
+  loader?: boolean;
+}
+const { page, loader = false, ...seo } = Astro.props;
+const devAttrs = import.meta.env.DEV ? { "data-grid-overlay": "" } : {};
+---
+<!doctype html>
+<html lang={site.lang} {...devAttrs}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
+    <Head {...seo} />
+  </head>
+  <body>
+    {loader && <div class="loader" data-loader aria-hidden="true"></div>}
+    <slot name="chrome" />
+    <div id="swup" class="transition-fade">
+      <main data-page={page}>
+        <slot />
+      </main>
+      <slot name="after-main" />
+    </div>
+    <script>
+      import "../scripts/main.js";
+    </script>
+  </body>
+</html>

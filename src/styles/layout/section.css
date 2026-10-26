@@ -1,0 +1,12 @@
+.section {
+  padding-block: var(--section-y);
+
+  &.section--flush-top { padding-block-start: 0; }
+  &.section--flush-bottom { padding-block-end: 0; }
+  &.section--alt { background: var(--color-bg-alt); }
+}
+
+.section__head {
+  max-width: var(--container-narrow);
+  margin-block-end: var(--space-8);
+}

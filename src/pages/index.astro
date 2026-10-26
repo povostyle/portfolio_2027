@@ -1,0 +1,37 @@
+---
+/**
+ * Home (≡ templates/page-home.php). Solo composición de blocks.
+ */
+import Page from "../layouts/Page.astro";
+import Hero from "../components/blocks/Hero.astro";
+import Accordion from "../components/blocks/Accordion.astro";
+import { site } from "../data/site";
+---
+<Page page="home" loader>
+  <Hero
+    title={site.name}
+    lead={site.tagline}
+    actions={[
+      { label: "Contactar", href: "/contacto/", variant: "primary" },
+      { label: "Saber más", href: "#intro", variant: "ghost" },
+    ]}
+  />
+
+  <section class="section" id="intro">
+    <div class="container">
+      <div class="grid">
+        <p class="eyebrow span-2" data-reveal>Qué hacemos</p>
+        <h2 class="start-3 end-10 md-start-1 md-end-8" data-text-reveal>Título de ejemplo con text reveal</h2>
+        <div class="start-3 end-9 md-span-4" data-reveal>
+          <Accordion
+            single
+            items={[
+              { title: "Primera pregunta", content: "<p>Respuesta de ejemplo.</p>" },
+              { title: "Segunda pregunta", content: "<p>Otra respuesta.</p>" },
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Page>

@@ -1,0 +1,12 @@
+/* Preloader de primera carga. JS: scripts/core/loader.js   Markup: header.php */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background: var(--color-ink);
+}
+
+/* Sin JS el loader no debe tapar nada */
+html:not(.is-ready) .loader {
+  display: none;
+}

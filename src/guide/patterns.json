@@ -1,0 +1,95 @@
+{
+  "_comment": "Patrones de maquetación compartidos por las guías de WordPress (templates/page-guia.php) y Astro (src/pages/guia.astro). Editar aquí; las dos guías lo leen.",
+  "patterns": [
+    {
+      "title": "Editorial con sangría",
+      "when": "Arranque de página o de sección. La columna 1 queda vacía como sangría: todo empieza en la línea 2.",
+      "html": "<div class=\"grid\">\n  <h2 class=\"start-2 end-9 md-start-1 md-end-8\">Titular largo que ocupa siete columnas</h2>\n  <p class=\"start-2 end-6 md-start-1 md-end-6\">El texto va más estrecho que el titular: cuatro columnas. En tablet pierde la sangría y en móvil ocupa todo.</p>\n</div>"
+    },
+    {
+      "title": "Etiqueta · titular · texto",
+      "when": "Bloques de presentación con tres niveles. La etiqueta marca el ritmo a la izquierda y el texto contesta a la derecha.",
+      "html": "<div class=\"grid\">\n  <p class=\"eyebrow span-2 md-span-2\">01 · Etiqueta</p>\n  <h2 class=\"start-3 end-8 md-start-3 md-end-9\">Titular a la izquierda</h2>\n  <p class=\"start-9 end-13 md-start-3 md-end-9\">Texto en las cuatro últimas columnas. En tablet baja debajo del titular, alineado con él.</p>\n</div>"
+    },
+    {
+      "title": "Centrado estrecho",
+      "when": "Citas, manifiestos, llamadas a la acción. Centrado por columnas, no con max-width.",
+      "html": "<div class=\"grid\">\n  <h2 class=\"col-narrow u-text-center\">Ocho columnas centradas: de la 3 a la 10</h2>\n  <p class=\"col-text u-text-center\">Seis columnas: de la 4 a la 9. Longitud de línea cómoda para leer.</p>\n</div>"
+    },
+    {
+      "title": "Imagen y texto",
+      "when": "Presentar un servicio, una persona, un proyecto. El texto deja una columna de aire y se centra en vertical.",
+      "html": "<div class=\"grid\">\n  <figure class=\"span-6 md-span-4\"><div class=\"ph\" style=\"--ar: 4/5\">span-6</div></figure>\n  <div class=\"start-8 end-12 md-start-5 md-end-9 u-self-center u-flow\">\n    <h3>Titular del bloque</h3>\n    <p>Texto de la columna 8 a la 11. La columna 7 queda vacía entre imagen y texto.</p>\n  </div>\n</div>"
+    },
+    {
+      "title": "Imagen a sangre",
+      "when": "Fotos o vídeos que deben llegar al borde de la pantalla. El pie de foto vuelve al grid.",
+      "html": "<div class=\"grid\">\n  <figure class=\"bleed\"><div class=\"ph\" style=\"--ar: 21/9\">.bleed</div></figure>\n  <p class=\"eyebrow start-2 end-6 md-start-1 md-end-5\">Pie de foto alineado con la columna 2</p>\n</div>"
+    },
+    {
+      "title": "Tres tarjetas a todo el ancho",
+      "when": "Últimas noticias, servicios, destacados. 3 × 4 columnas. En tablet, dos por fila; en móvil, una.",
+      "html": "<div class=\"grid\">\n  <article class=\"span-4 md-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-4</div><h4>Tarjeta</h4></article>\n  <article class=\"span-4 md-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-4</div><h4>Tarjeta</h4></article>\n  <article class=\"span-4 md-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-4</div><h4>Tarjeta</h4></article>\n</div>"
+    },
+    {
+      "title": "Tres tarjetas asimétricas (9 columnas)",
+      "when": "Descentrado a propósito: 9 columnas no se pueden centrar en 12 (sobran 3). Queda 1 columna libre a la izquierda y 2 a la derecha. Tono editorial. Cada borde de tarjeta cae en una columna.",
+      "html": "<div class=\"grid\">\n  <div class=\"subgrid start-2 end-11 md-start-1 md-end-9\">\n    <article class=\"span-3 md-span-4 sm-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-3</div><h4>Tarjeta</h4></article>\n    <article class=\"span-3 md-span-4 sm-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-3</div><h4>Tarjeta</h4></article>\n    <article class=\"span-3 md-span-4 sm-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-3</div><h4>Tarjeta</h4></article>\n  </div>\n</div>"
+    },
+    {
+      "title": "Tres tarjetas centradas (10 columnas)",
+      "when": "Tres tarjetas centradas con aire a los lados. El bloque va de la 2 a la 11 (10 columnas, centrado) y dentro se reparte en tercios con split-3. Los bordes interiores no caen en columna: es el precio de centrar tres en doce.",
+      "html": "<div class=\"grid\">\n  <div class=\"start-2 end-12 md-start-1 md-end-9 split-3\">\n    <article><div class=\"ph\" style=\"--ar: 4/3\">1/3</div><h4>Tarjeta</h4></article>\n    <article><div class=\"ph\" style=\"--ar: 4/3\">1/3</div><h4>Tarjeta</h4></article>\n    <article><div class=\"ph\" style=\"--ar: 4/3\">1/3</div><h4>Tarjeta</h4></article>\n  </div>\n</div>"
+    },
+    {
+      "title": "Cuatro tarjetas",
+      "when": "Equipo, logos grandes, categorías. 4 × 3 columnas. En tablet y móvil, dos por fila.",
+      "html": "<div class=\"grid\">\n  <article class=\"span-3 md-span-4 sm-span-2\"><div class=\"ph\" style=\"--ar: 1\">span-3</div></article>\n  <article class=\"span-3 md-span-4 sm-span-2\"><div class=\"ph\" style=\"--ar: 1\">span-3</div></article>\n  <article class=\"span-3 md-span-4 sm-span-2\"><div class=\"ph\" style=\"--ar: 1\">span-3</div></article>\n  <article class=\"span-3 md-span-4 sm-span-2\"><div class=\"ph\" style=\"--ar: 1\">span-3</div></article>\n</div>"
+    },
+    {
+      "title": "Miniaturas de una columna",
+      "when": "Detalles pequeños que acompañan a un titular: avatares, iconos, fotos de producto. Cada hijo del subgrid cae en una columna.",
+      "html": "<div class=\"grid\">\n  <h2 class=\"start-2 end-8 md-start-1 md-end-7\">Titular con miniaturas a la derecha</h2>\n  <div class=\"subgrid start-8 end-11 md-start-7 md-end-9\">\n    <div class=\"ph\" style=\"--ar: 1\">1</div>\n    <div class=\"ph\" style=\"--ar: 1\">1</div>\n    <div class=\"ph\" style=\"--ar: 1\">1</div>\n  </div>\n</div>"
+    },
+    {
+      "title": "Mosaico asimétrico",
+      "when": "Galerías de proyecto, portadas con una imagen protagonista. La grande ocupa dos filas.",
+      "html": "<div class=\"grid\">\n  <figure class=\"span-7 row-span-2\"><div class=\"ph ph--fill\">span-7 row-span-2</div></figure>\n  <figure class=\"span-5 md-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-5</div></figure>\n  <figure class=\"span-5 md-span-4\"><div class=\"ph\" style=\"--ar: 4/3\">span-5</div></figure>\n</div>"
+    },
+    {
+      "title": "Índice o listado",
+      "when": "Áreas, servicios, sectores, ofertas de empleo. Cada fila es un subgrid a todo el ancho: número, etiqueta, titular y texto en columnas fijas. Ojo: dentro de un subgrid, en móvil cada hijo ocupa UNA columna salvo que lleve sm-*.",
+      "html": "<div class=\"grid\">\n  <article class=\"subgrid col-full u-rule-top\">\n    <p class=\"eyebrow span-1 md-span-1 sm-span-1\">01</p>\n    <p class=\"eyebrow start-2 end-4 md-start-2 md-end-5 sm-start-2 sm-end-5\">Etiqueta</p>\n    <h3 class=\"start-4 end-8 md-start-2 md-end-9 sm-start-1 sm-end-5\">Titular de la fila</h3>\n    <p class=\"start-9 end-13 md-start-2 md-end-9 sm-start-1 sm-end-5\">Texto de la fila en las últimas cuatro columnas.</p>\n  </article>\n  <article class=\"subgrid col-full u-rule-top\">\n    <p class=\"eyebrow span-1 md-span-1 sm-span-1\">02</p>\n    <p class=\"eyebrow start-2 end-4 md-start-2 md-end-5 sm-start-2 sm-end-5\">Etiqueta</p>\n    <h3 class=\"start-4 end-8 md-start-2 md-end-9 sm-start-1 sm-end-5\">Otra fila</h3>\n    <p class=\"start-9 end-13 md-start-2 md-end-9 sm-start-1 sm-end-5\">Mismas columnas: todas las filas quedan alineadas.</p>\n  </article>\n</div>"
+    },
+    {
+      "title": "Cifras",
+      "when": "Datos clave. 4 × 3 columnas; en móvil, dos por fila.",
+      "html": "<div class=\"grid\">\n  <div class=\"span-3 md-span-4 sm-span-2\"><p class=\"h2\">25</p><p class=\"eyebrow\">Años</p></div>\n  <div class=\"span-3 md-span-4 sm-span-2\"><p class=\"h2\">140</p><p class=\"eyebrow\">Empresas</p></div>\n  <div class=\"span-3 md-span-4 sm-span-2\"><p class=\"h2\">6.000</p><p class=\"eyebrow\">Personas</p></div>\n  <div class=\"span-3 md-span-4 sm-span-2\"><p class=\"h2\">4</p><p class=\"eyebrow\">Áreas</p></div>\n</div>"
+    },
+    {
+      "title": "Lateral fijo",
+      "when": "Páginas largas por secciones: el título se queda fijo mientras el contenido pasa. En móvil deja de ser fijo.",
+      "html": "<div class=\"grid\">\n  <h3 class=\"start-1 end-5 md-span-3 u-sticky\">Título fijo</h3>\n  <div class=\"start-6 end-13 md-start-4 md-end-9 u-flow\">\n    <div class=\"ph\" style=\"--ar: 16/9\">start-6 end-13</div>\n    <p>El contenido ocupa las siete últimas columnas. Al hacer scroll, el título de la izquierda acompaña.</p>\n    <div class=\"ph\" style=\"--ar: 16/9\"></div>\n  </div>\n</div>"
+    },
+    {
+      "title": "Texto largo",
+      "when": "Entradas del blog, páginas legales. La posición la dan las columnas; el ancho de lectura, u-measure (65 caracteres).",
+      "html": "<div class=\"grid\">\n  <div class=\"start-2 end-12 md-start-1 md-end-9 u-flow u-measure\">\n    <p>Este bloque ocupa diez columnas, pero el texto no pasa de unos 65 caracteres por línea. Es el único caso en que limitar el ancho tiene sentido: no maqueta, solo hace que se lea bien.</p>\n    <p>Segundo párrafo para ver el ritmo vertical. Enciende las filas con Shift + G.</p>\n  </div>\n</div>"
+    },
+    {
+      "title": "Listado automático",
+      "when": "Cuando no sabes cuántos elementos habrá (archivo del blog, resultados de búsqueda). Las columnas salen solas por ancho mínimo. No se alinea con el grid de página: úsalo solo en listados.",
+      "html": "<div class=\"grid grid--auto\">\n  <article><div class=\"ph\" style=\"--ar: 4/3\">auto</div></article>\n  <article><div class=\"ph\" style=\"--ar: 4/3\">auto</div></article>\n  <article><div class=\"ph\" style=\"--ar: 4/3\">auto</div></article>\n  <article><div class=\"ph\" style=\"--ar: 4/3\">auto</div></article>\n  <article><div class=\"ph\" style=\"--ar: 4/3\">auto</div></article>\n</div>"
+    },
+    {
+      "title": "Parallax",
+      "when": "Imágenes que se desplazan a otra velocidad que el scroll. La imagen va dentro de un marco con overflow oculto y algo más grande que él para que no asomen bordes. data-scroll-speed negativo = más lento; positivo = más rápido. Se desactiva solo en móvil y con «reducir movimiento».",
+      "html": "<div class=\"grid\">\n  <figure class=\"start-2 end-8 md-start-1 md-end-7\" style=\"overflow: hidden\">\n    <div class=\"ph\" style=\"--ar: 16/10; scale: 1.15\" data-scroll data-scroll-speed=\"-0.1\">data-scroll-speed=\"-0.1\"</div>\n  </figure>\n  <div class=\"start-9 end-12 md-start-7 md-end-9 u-self-center\" data-scroll data-scroll-speed=\"0.08\">\n    <p class=\"h4\">Texto a otra velocidad</p>\n  </div>\n</div>"
+    },
+    {
+      "title": "Progreso en CSS",
+      "when": "Animaciones ligadas al scroll sin escribir JavaScript: data-scroll-css-progress escribe --progress (de 0 a 1) mientras el bloque cruza la pantalla, y el CSS lo usa en transform, opacity o clip-path.",
+      "html": "<div class=\"grid\" data-scroll data-scroll-css-progress>\n  <p class=\"eyebrow start-2 end-6 md-start-1 md-end-5\">--progress de 0 a 1</p>\n  <div class=\"start-2 end-12 md-start-1 md-end-9\" style=\"height: 0.5rem; background: var(--color-bg-alt)\">\n    <div style=\"height: 100%; background: var(--color-ink); transform-origin: left; transform: scaleX(var(--progress, 0))\"></div>\n  </div>\n  <h3 class=\"start-2 end-10 md-start-1 md-end-9\" style=\"opacity: calc(0.15 + var(--progress, 0) * 0.85); translate: calc((1 - var(--progress, 0)) * 4rem) 0\">El titular aparece y se desliza con el scroll</h3>\n</div>"
+    }
+  ]
+}

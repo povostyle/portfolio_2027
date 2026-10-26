@@ -1,0 +1,119 @@
+/*
+ * Herramientas de desarrollo. Solo actúan si <html data-grid-overlay>.
+ * JS: scripts/core/grid-overlay.js
+ *
+ * Excepción a la regla de tokens: los colores de aquí son literales a propósito,
+ * para que el overlay se vea igual en todos los proyectos sea cual sea su paleta.
+ */
+
+/* Columnas ---------------------------------------------------------------- */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  display: none;
+
+  html.is-grid-cols & {
+    display: block;
+  }
+}
+
+.grid-overlay__frame,
+.grid-overlay__grid {
+  height: 100%;
+}
+
+.grid-overlay__grid > .grid-overlay__col {
+  grid-column: auto;
+  position: relative;
+  background: rgb(255 0 90 / 6%);
+  box-shadow:
+    inset 1px 0 rgb(255 0 90 / 30%),
+    inset -1px 0 rgb(255 0 90 / 30%);
+
+  &::before {
+    content: attr(data-n);
+    position: absolute;
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0.375rem;
+    font: 500 0.625rem/1 ui-monospace, "SF Mono", Menlo, monospace;
+    color: rgb(255 0 90 / 70%);
+  }
+}
+
+/* Mostrar solo las columnas que tiene el grid en cada tramo */
+@media (max-width: 47.99em) {
+  .grid-overlay__col:nth-child(n + 5) { display: none; }
+}
+
+@media (min-width: 48em) and (max-width: 63.99em) {
+  .grid-overlay__col:nth-child(n + 9) { display: none; }
+}
+
+/* Filas: ritmo vertical de 8px, línea más marcada cada 64px ----------------- */
+.grid-overlay-rows {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 9997;
+  pointer-events: none;
+  display: none;
+  background-image:
+    repeating-linear-gradient(to bottom, rgb(0 140 255 / 28%) 0 1px, transparent 1px var(--space-8)),
+    repeating-linear-gradient(to bottom, rgb(0 140 255 / 10%) 0 1px, transparent 1px var(--space-2));
+
+  html.is-grid-rows & {
+    display: block;
+  }
+}
+
+/* Botón flotante ---------------------------------------------------------- */
+.grid-toggle {
+  position: fixed;
+  inset-block-end: 1rem;
+  inset-inline-start: 1rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(17 17 24 / 88%);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font: 500 0.6875rem/1 ui-monospace, "SF Mono", Menlo, monospace;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+}
+
+.grid-toggle__opt {
+  padding: 0.375rem 0.625rem;
+  border-radius: 999px;
+  color: rgb(255 255 255 / 60%);
+
+  &.is-on {
+    background: #fff;
+    color: #111118;
+  }
+}
+
+.grid-toggle__info {
+  padding-inline: 0.375rem 0.5rem;
+  color: rgb(255 255 255 / 45%);
+}
+
+@media print {
+  .grid-overlay,
+  .grid-overlay-rows,
+  .grid-toggle {
+    display: none !important;
+  }
+}

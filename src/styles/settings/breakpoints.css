@@ -1,0 +1,13 @@
+/*
+ * Referencia de breakpoints. Las media queries no admiten custom properties,
+ * así que los valores se repiten a mano. Mantener esta tabla como fuente de verdad.
+ *
+ *   sm   640px   (min-width: 40em)
+ *   md   768px   (min-width: 48em)
+ *   lg   1024px  (min-width: 64em)
+ *   xl   1280px  (min-width: 80em)
+ *   2xl  1536px  (min-width: 96em)
+ *
+ * Mobile-first: escribir el estilo base para móvil y sobreescribir con min-width.
+ * Equivalente JS: scripts/utils/media.js → matchBp("md")
+ */

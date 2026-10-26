@@ -1,0 +1,43 @@
+/*
+ * Espaciado, contenedores y radios.
+ * --space-* es la única escala; las secciones usan --section-y.
+ */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /*
+   * MODO DE PÁGINA: pantalla completa (activo desde el 26 oct 2026, en prueba).
+   * 12 columnas de borde a borde, margen lateral = separación entre columnas.
+   * Por encima de 1440px todo escala en proporción (ver html en base/global.css).
+   *
+   * Para VOLVER al modo marco (contenido centrado en 1440px), cambiar estas tres líneas:
+   *   --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+   *   --container-max: 90rem;
+   *   y en base/global.css quitar el bloque «Escalado proporcional».
+   */
+  --grid-gap: clamp(1rem, 0.6rem + 1vw, 1.5rem);     /* separación entre columnas: 16 → 24px */
+  --gutter: var(--grid-gap);                         /* margen lateral = hueco */
+  --container-max: 100vw;                            /* sin marco */
+  --container-narrow: 46rem;   /* ~740px, texto */
+  --section-y: clamp(4rem, 2rem + 8vw, 9rem);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+
+  --header-height: 5rem;
+  --z-header: 100;
+  --z-menu: 200;
+  --z-modal: 300;
+  --z-loader: 400;
+}

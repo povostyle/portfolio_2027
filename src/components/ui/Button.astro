@@ -1,0 +1,23 @@
+---
+/**
+ * Botón. CSS: styles/components/button.css  (≡ components/ui/button.php)
+ * Con href → <a>; sin href → <button type="button">.
+ */
+import Icon from "./Icon.astro";
+
+interface Props {
+  label: string;
+  href?: string;
+  variant?: "default" | "primary" | "accent" | "ghost";
+  small?: boolean;
+  icon?: string;
+  [attr: string]: unknown;
+}
+const { label, href, variant = "default", small = false, icon, ...attrs } = Astro.props;
+const Tag = href ? "a" : "button";
+const classes = ["button", variant !== "default" && `button--${variant}`, small && "button--small"];
+---
+<Tag class:list={classes} href={href} type={href ? undefined : "button"} {...attrs}>
+  <span>{label}</span>
+  {icon && <Icon name={icon} class="button__icon" />}
+</Tag>

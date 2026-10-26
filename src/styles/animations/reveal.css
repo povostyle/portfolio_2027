@@ -1,0 +1,44 @@
+/*
+ * Reveal genérico por scroll. JS: scripts/animations/reveal.js
+ *   <div data-reveal>              fade + up
+ *   <div data-reveal="fade">       solo fade
+ *   <div data-reveal="stagger">    hijos directos en cascada
+ * Estado inicial SOLO bajo html.is-ready para que sin JS todo sea visible.
+ */
+html.is-ready [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+html.is-ready [data-reveal="fade"]:not(.is-revealed) {
+  transform: none;
+}
+
+html.is-ready [data-reveal="stagger"]:not(.is-revealed) {
+  opacity: 1;
+  transform: none;
+
+  & > * {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+[data-reveal],
+[data-reveal="stagger"] > * {
+  transition:
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
+}
+
+[data-reveal="stagger"].is-revealed > * {
+  transition-delay: calc(var(--index, 0) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.is-ready [data-reveal]:not(.is-revealed),
+  html.is-ready [data-reveal="stagger"]:not(.is-revealed) > * {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,29 @@
+---
+/** Hero. CSS: styles/components/hero.css   Entrada animada: scripts/pages/home.js  (≡ blocks/hero.php) */
+import Button from "../ui/Button.astro";
+
+interface Action { label: string; href: string; variant?: "default" | "primary" | "accent" | "ghost" }
+interface Props {
+  title: string;
+  lead?: string;
+  image?: { src: string; alt: string };
+  actions?: Action[];
+}
+const { title, lead, image, actions = [] } = Astro.props;
+---
+<section class="hero" data-theme={image ? "dark" : undefined}>
+  {image && (
+    <div class="hero__media">
+      <img src={image.src} alt={image.alt} loading="eager" fetchpriority="high" />
+    </div>
+  )}
+  <div class="container">
+    <h1 class="hero__title">{title}</h1>
+    {lead && <p class="hero__lead body-lg">{lead}</p>}
+    {actions.length > 0 && (
+      <div class="hero__actions">
+        {actions.map((a) => <Button label={a.label} href={a.href} variant={a.variant} />)}
+      </div>
+    )}
+  </div>
+</section>

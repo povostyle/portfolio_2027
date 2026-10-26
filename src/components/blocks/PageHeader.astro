@@ -1,0 +1,15 @@
+---
+/** Cabecera de página interior (≡ blocks/page-header.php). CSS: styles/components/page-header.css */
+interface Props { title: string; eyebrow?: string }
+const { title, eyebrow } = Astro.props;
+---
+<section class="page-header section">
+  <div class="container">
+    <div class="grid">
+      <div class="start-2 end-10 md-start-1 md-end-8">
+        {eyebrow && <p class="eyebrow" data-reveal="fade">{eyebrow}</p>}
+        <h1 data-text-reveal>{title}</h1>
+      </div>
+    </div>
+  </div>
+</section>

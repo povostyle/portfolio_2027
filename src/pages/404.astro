@@ -1,0 +1,17 @@
+---
+import Page from "../layouts/Page.astro";
+import PageHeader from "../components/blocks/PageHeader.astro";
+import Button from "../components/ui/Button.astro";
+---
+<Page page="404" title="Página no encontrada">
+  <PageHeader eyebrow="Error 404" title="Esta página no existe" />
+  <section class="section section--flush-top">
+    <div class="container">
+      <div class="grid">
+        <div class="start-2 end-8 md-start-1 md-end-8">
+          <Button label="Volver al inicio" href="/" variant="primary" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Page>

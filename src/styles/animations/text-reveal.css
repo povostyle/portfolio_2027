@@ -1,0 +1,13 @@
+/*
+ * Reveal de texto por líneas (SplitText). JS: scripts/animations/text-reveal.js
+ *   <h2 data-text-reveal>…</h2>
+ */
+.text-reveal__line {
+  display: block;
+  overflow: hidden;
+}
+
+.text-reveal__inner {
+  display: block;
+  will-change: transform;
+}

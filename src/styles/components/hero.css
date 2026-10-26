@@ -1,0 +1,47 @@
+/*
+ * Hero de portada. Vista: components/blocks/hero.php
+ */
+.hero {
+  position: relative;
+  min-height: calc(var(--vh, 1vh) * 100);
+  display: grid;
+  align-content: end;
+  padding-block: calc(var(--header-height) + var(--space-8)) var(--space-8);
+  overflow: clip;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  & img,
+  & video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 55%), transparent 60%);
+  }
+}
+
+.hero__title {
+  max-width: 14ch;
+}
+
+.hero__lead {
+  max-width: var(--container-narrow);
+  margin-block-start: var(--space-5);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-6);
+}

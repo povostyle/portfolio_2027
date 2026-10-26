@@ -1,0 +1,37 @@
+/*
+ * .image — imagen con proporción opcional, fundido al cargar y pie.
+ * Vistas: Astro components/ui/Image.astro · WP components/ui/image.php (bc_component('ui/image', ['id' => …])).
+ *   .image--cover  recorta a --ar (width / height)
+ *   .image--lazy   empieza invisible y aparece al cargar (.is-loaded). Sin JS se ve siempre.
+ */
+.image {
+  display: block;
+  position: relative;
+  margin: 0;
+}
+
+.image__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image--cover .image__img {
+  aspect-ratio: var(--ar);
+  height: auto;
+  object-fit: cover;
+}
+
+html.is-ready .image--lazy:not(.is-loaded) .image__img {
+  opacity: 0;
+}
+
+.image--lazy .image__img {
+  transition: opacity var(--transition-slow);
+}
+
+.image__caption {
+  margin-block-start: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}

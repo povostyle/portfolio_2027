@@ -1,0 +1,232 @@
+/*
+ * GRID — 4 columnas en móvil · 8 en tablet (≥48em) · 12 en escritorio (≥64em).
+ *
+ * El grid vive dentro de .container. Modo actual: pantalla completa (ver settings/spacing.css).
+ * --col = ancho de una columna · .subgrid = alinear hijos a las columnas · .u-w-N = medir en columnas.
+ * Para estrechar un bloque NO se usa max-width: se coloca en columnas.
+ *
+ *   <div class="container">
+ *     <div class="grid">
+ *       <h2 class="start-3 end-11">…</h2>          ← de la línea 3 a la 11 (8 columnas centradas)
+ *       <p class="col-text">…</p>                  ← atajo: 4 → 10 en escritorio
+ *       <figure class="span-6 md-span-4">…</figure>
+ *     </div>
+ *   </div>
+ *
+ * Reglas:
+ * - En móvil todo ocupa el ancho completo salvo que se diga lo contrario (sm-*).
+ * - Las clases sin prefijo (start-, end-, span-) actúan desde escritorio (≥64em).
+ *   Las md-* actúan solo en tablet (48em–63.99em). Las sm-* solo en móvil.
+ * - start-N y end-N se refieren a LÍNEAS del grid: end-11 termina antes de la columna 11.
+ *   Igual que en Figma con "columnas 3 a 10": start-3 end-11.
+ * - Orden de prioridad: span-N pone el elemento en el flujo; start-N lo fija; end-N lo cierra.
+ *   start-3 span-6 = columnas 3 a 8. start-3 end-11 = columnas 3 a 10.
+ * - Dentro de un .subgrid las mismas clases cuentan desde el borde del subgrid:
+ *   <div class="subgrid start-2 end-11"> <article class="span-3">… → tres de 3 columnas.
+ * - row-span-2: ocupa dos filas (mosaicos). Solo escritorio.
+ * - Atajos semánticos: col-full · col-wide · col-narrow · col-text.
+ * - .bleed saca un elemento hasta los bordes de la pantalla (fondos, imágenes a sangre).
+ * - El overlay de depuración (tecla G) dibuja exactamente este grid.
+ */
+
+:root {
+  --grid-cols: 4;
+
+  /* Ancho exacto de UNA columna del grid de página. Para medir cosas fuera del grid. */
+  --col: calc(
+    (min(100vw - var(--scrollbar-width, 0px), var(--container-max)) - 2 * var(--gutter) - (var(--grid-cols) - 1) * var(--grid-gap))
+    / var(--grid-cols)
+  );
+
+  @media (min-width: 48em) {
+    --grid-cols: 8;
+  }
+
+  @media (min-width: 64em) {
+    --grid-cols: 12;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+  row-gap: var(--grid-row-gap, var(--space-6));
+
+  & > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+}
+
+/*
+ * Subgrid: un bloque que ocupa N columnas y cuyos hijos se alinean con las columnas de la página.
+ *   <div class="subgrid start-8 end-11">  <img> <img> <img>  </div>   → una columna por imagen
+ */
+.grid > .subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--grid-row-gap, var(--grid-gap));
+}
+
+/*
+ * Medir en columnas fuera del grid (iconos, miniaturas en un slider, etc.).
+ *   .u-w-2 → ancho de 2 columnas + 1 hueco
+ */
+.u-w-1 { width: var(--col); }
+.u-w-2 { width: calc(var(--col) * 2 + var(--grid-gap)); }
+.u-w-3 { width: calc(var(--col) * 3 + var(--grid-gap) * 2); }
+.u-w-4 { width: calc(var(--col) * 4 + var(--grid-gap) * 3); }
+.u-w-6 { width: calc(var(--col) * 6 + var(--grid-gap) * 5); }
+
+/* Grid automático por ancho mínimo (listados de tarjetas). No usa columnas fijas. */
+.grid--auto {
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min, 18rem), 100%), 1fr));
+
+  & > * {
+    grid-column: auto;
+  }
+}
+
+/* Sin separación vertical entre filas */
+.grid--tight {
+  row-gap: 0;
+}
+
+/* A sangre: hasta los bordes del viewport desde dentro de .container */
+.bleed {
+  margin-inline: calc(50% - 50vw);
+}
+
+/* Móvil (4 columnas) ---------------------------------------------------- */
+@media (max-width: 47.99em) {
+  :is(.grid, .subgrid) > .sm-span-1 { grid-column-start: auto; grid-column-end: span 1; }
+  :is(.grid, .subgrid) > .sm-span-2 { grid-column-start: auto; grid-column-end: span 2; }
+  :is(.grid, .subgrid) > .sm-span-3 { grid-column-start: auto; grid-column-end: span 3; }
+  :is(.grid, .subgrid) > .sm-span-4 { grid-column-start: auto; grid-column-end: span 4; }
+  :is(.grid, .subgrid) > .sm-start-1 { grid-column-start: 1; }
+  :is(.grid, .subgrid) > .sm-start-2 { grid-column-start: 2; }
+  :is(.grid, .subgrid) > .sm-start-3 { grid-column-start: 3; }
+  :is(.grid, .subgrid) > .sm-start-4 { grid-column-start: 4; }
+  :is(.grid, .subgrid) > .sm-end-2 { grid-column-end: 2; }
+  :is(.grid, .subgrid) > .sm-end-3 { grid-column-end: 3; }
+  :is(.grid, .subgrid) > .sm-end-4 { grid-column-end: 4; }
+  :is(.grid, .subgrid) > .sm-end-5 { grid-column-end: 5; }
+}
+
+/* Tablet (8 columnas) --------------------------------------------------- */
+@media (min-width: 48em) and (max-width: 63.99em) {
+  :is(.grid, .subgrid) > .md-span-1 { grid-column-start: auto; grid-column-end: span 1; }
+  :is(.grid, .subgrid) > .md-span-2 { grid-column-start: auto; grid-column-end: span 2; }
+  :is(.grid, .subgrid) > .md-span-3 { grid-column-start: auto; grid-column-end: span 3; }
+  :is(.grid, .subgrid) > .md-span-4 { grid-column-start: auto; grid-column-end: span 4; }
+  :is(.grid, .subgrid) > .md-span-5 { grid-column-start: auto; grid-column-end: span 5; }
+  :is(.grid, .subgrid) > .md-span-6 { grid-column-start: auto; grid-column-end: span 6; }
+  :is(.grid, .subgrid) > .md-span-7 { grid-column-start: auto; grid-column-end: span 7; }
+  :is(.grid, .subgrid) > .md-span-8 { grid-column-start: auto; grid-column-end: span 8; }
+  :is(.grid, .subgrid) > .md-start-1 { grid-column-start: 1; }
+  :is(.grid, .subgrid) > .md-start-2 { grid-column-start: 2; }
+  :is(.grid, .subgrid) > .md-start-3 { grid-column-start: 3; }
+  :is(.grid, .subgrid) > .md-start-4 { grid-column-start: 4; }
+  :is(.grid, .subgrid) > .md-start-5 { grid-column-start: 5; }
+  :is(.grid, .subgrid) > .md-start-6 { grid-column-start: 6; }
+  :is(.grid, .subgrid) > .md-start-7 { grid-column-start: 7; }
+  :is(.grid, .subgrid) > .md-start-8 { grid-column-start: 8; }
+  :is(.grid, .subgrid) > .md-end-2 { grid-column-end: 2; }
+  :is(.grid, .subgrid) > .md-end-3 { grid-column-end: 3; }
+  :is(.grid, .subgrid) > .md-end-4 { grid-column-end: 4; }
+  :is(.grid, .subgrid) > .md-end-5 { grid-column-end: 5; }
+  :is(.grid, .subgrid) > .md-end-6 { grid-column-end: 6; }
+  :is(.grid, .subgrid) > .md-end-7 { grid-column-end: 7; }
+  :is(.grid, .subgrid) > .md-end-8 { grid-column-end: 8; }
+  :is(.grid, .subgrid) > .md-end-9 { grid-column-end: 9; }
+}
+
+/* Escritorio (12 columnas) ---------------------------------------------- */
+@media (min-width: 64em) {
+  :is(.grid, .subgrid) > .span-1 { grid-column-start: auto; grid-column-end: span 1; }
+  :is(.grid, .subgrid) > .span-2 { grid-column-start: auto; grid-column-end: span 2; }
+  :is(.grid, .subgrid) > .span-3 { grid-column-start: auto; grid-column-end: span 3; }
+  :is(.grid, .subgrid) > .span-4 { grid-column-start: auto; grid-column-end: span 4; }
+  :is(.grid, .subgrid) > .span-5 { grid-column-start: auto; grid-column-end: span 5; }
+  :is(.grid, .subgrid) > .span-6 { grid-column-start: auto; grid-column-end: span 6; }
+  :is(.grid, .subgrid) > .span-7 { grid-column-start: auto; grid-column-end: span 7; }
+  :is(.grid, .subgrid) > .span-8 { grid-column-start: auto; grid-column-end: span 8; }
+  :is(.grid, .subgrid) > .span-9 { grid-column-start: auto; grid-column-end: span 9; }
+  :is(.grid, .subgrid) > .span-10 { grid-column-start: auto; grid-column-end: span 10; }
+  :is(.grid, .subgrid) > .span-11 { grid-column-start: auto; grid-column-end: span 11; }
+  :is(.grid, .subgrid) > .span-12 { grid-column-start: auto; grid-column-end: span 12; }
+  :is(.grid, .subgrid) > .start-1 { grid-column-start: 1; }
+  :is(.grid, .subgrid) > .start-2 { grid-column-start: 2; }
+  :is(.grid, .subgrid) > .start-3 { grid-column-start: 3; }
+  :is(.grid, .subgrid) > .start-4 { grid-column-start: 4; }
+  :is(.grid, .subgrid) > .start-5 { grid-column-start: 5; }
+  :is(.grid, .subgrid) > .start-6 { grid-column-start: 6; }
+  :is(.grid, .subgrid) > .start-7 { grid-column-start: 7; }
+  :is(.grid, .subgrid) > .start-8 { grid-column-start: 8; }
+  :is(.grid, .subgrid) > .start-9 { grid-column-start: 9; }
+  :is(.grid, .subgrid) > .start-10 { grid-column-start: 10; }
+  :is(.grid, .subgrid) > .start-11 { grid-column-start: 11; }
+  :is(.grid, .subgrid) > .start-12 { grid-column-start: 12; }
+  :is(.grid, .subgrid) > .end-2 { grid-column-end: 2; }
+  :is(.grid, .subgrid) > .end-3 { grid-column-end: 3; }
+  :is(.grid, .subgrid) > .end-4 { grid-column-end: 4; }
+  :is(.grid, .subgrid) > .end-5 { grid-column-end: 5; }
+  :is(.grid, .subgrid) > .end-6 { grid-column-end: 6; }
+  :is(.grid, .subgrid) > .end-7 { grid-column-end: 7; }
+  :is(.grid, .subgrid) > .end-8 { grid-column-end: 8; }
+  :is(.grid, .subgrid) > .end-9 { grid-column-end: 9; }
+  :is(.grid, .subgrid) > .end-10 { grid-column-end: 10; }
+  :is(.grid, .subgrid) > .end-11 { grid-column-end: 11; }
+  :is(.grid, .subgrid) > .end-12 { grid-column-end: 12; }
+  :is(.grid, .subgrid) > .end-13 { grid-column-end: 13; }
+}
+
+/* Atajos semánticos ----------------------------------------------------- */
+/* Un span-N sin start sigue el flujo; con start-N se fija la posición. */
+:is(.grid, .subgrid) > .col-full { grid-column: 1 / -1; }
+
+@media (min-width: 48em) and (max-width: 63.99em) {
+  :is(.grid, .subgrid) > .col-wide { grid-column: 1 / -1; }
+  :is(.grid, .subgrid) > .col-narrow { grid-column: 2 / 8; }
+  :is(.grid, .subgrid) > .col-text { grid-column: 2 / 8; }
+}
+
+@media (min-width: 64em) {
+  :is(.grid, .subgrid) > .col-wide { grid-column: 2 / 12; }   /* 10 columnas */
+  :is(.grid, .subgrid) > .col-narrow { grid-column: 3 / 11; } /* 8 columnas, ≈ el antiguo max-width de 1200 */
+  :is(.grid, .subgrid) > .col-text { grid-column: 4 / 10; }   /* 6 columnas, longitud de línea cómoda */
+}
+
+/* Filas (mosaicos) — solo escritorio */
+@media (min-width: 64em) {
+  :is(.grid, .subgrid) > .row-span-2 { grid-row: span 2; }
+  :is(.grid, .subgrid) > .row-span-3 { grid-row: span 3; }
+}
+
+/*
+ * Reparto en partes iguales dentro de un bloque ya colocado en el grid.
+ * Para cuando el número de elementos no divide el ancho del bloque (3 en 10 columnas).
+ *   <div class="start-2 end-12 split-3"> … </div>
+ * Tablet: split-3 y split-4 pasan a 2. Móvil: todo a 1 (split-4 a 2).
+ */
+.split-2,
+.split-3,
+.split-4 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--grid-row-gap, var(--space-6)) var(--grid-gap);
+}
+
+.split-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (min-width: 48em) {
+  .split-2,
+  .split-3,
+  .split-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64em) {
+  .split-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .split-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

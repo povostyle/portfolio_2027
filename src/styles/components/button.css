@@ -1,0 +1,72 @@
+/*
+ * .button  .button--primary | --accent | --ghost | --small
+ * Vista: components/ui/button.php
+ */
+.button {
+  --button-bg: var(--color-ink);
+  --button-ink: var(--color-bg);
+  --button-border: var(--color-ink);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.8em 1.5em;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--button-ink);
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.button--primary {
+    --button-bg: var(--color-primary);
+    --button-ink: var(--color-on-primary);
+    --button-border: var(--color-primary);
+  }
+
+  &.button--accent {
+    --button-bg: var(--color-accent);
+    --button-ink: var(--color-on-accent);
+    --button-border: var(--color-accent);
+  }
+
+  &.button--ghost {
+    --button-bg: transparent;
+    --button-ink: var(--color-ink);
+    --button-border: var(--color-line);
+
+    &:hover {
+      --button-border: var(--color-ink);
+    }
+  }
+
+  &.button--small {
+    padding: 0.6em 1.1em;
+    font-size: var(--text-xs);
+  }
+
+  &[disabled],
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.button__icon {
+  width: 1em;
+  height: 1em;
+}

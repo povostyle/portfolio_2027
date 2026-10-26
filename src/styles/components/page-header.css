@@ -1,0 +1,4 @@
+/* Cabecera de página interior. Vista: components/blocks/page-header.php */
+.page-header {
+  padding-block-start: calc(var(--header-height) + var(--section-y));
+}

@@ -1,0 +1,51 @@
+/*
+ * ÚNICO entry de CSS. Aquí no van reglas: solo el orden de capas y los imports.
+ *
+ * Orden de cascada garantizado por @layer, no por el orden de import:
+ *   settings → base → layout → components → animations → pages → utilities
+ *
+ * Para añadir un archivo: crearlo en su carpeta y añadir el @import en su capa.
+ */
+@layer settings, base, layout, components, animations, pages, utilities;
+
+/* 1. Tokens ------------------------------------------------------------ */
+@import "./settings/colors.css" layer(settings);
+@import "./settings/typography.css" layer(settings);
+@import "./settings/spacing.css" layer(settings);
+@import "./settings/motion.css" layer(settings);
+
+/* 2. Base --------------------------------------------------------------- */
+@import "./base/reset.css" layer(base);
+@import "./base/fonts.css" layer(base);
+@import "./base/typography.css" layer(base);
+@import "./base/global.css" layer(base);
+
+/* 3. Layout ------------------------------------------------------------- */
+@import "./layout/container.css" layer(layout);
+@import "./layout/grid.css" layer(layout);
+@import "./layout/section.css" layer(layout);
+@import "./layout/header.css" layer(layout);
+@import "./layout/footer.css" layer(layout);
+
+/* 4. Components --------------------------------------------------------- */
+@import "./components/button.css" layer(components);
+@import "./components/image.css" layer(components);
+@import "./components/menu.css" layer(components);
+@import "./components/hero.css" layer(components);
+@import "./components/accordion.css" layer(components);
+@import "./components/page-header.css" layer(components);
+@import "./components/post-card.css" layer(components);
+@import "./components/loader.css" layer(components);
+
+/* 5. Animations --------------------------------------------------------- */
+@import "./animations/transitions.css" layer(animations);
+@import "./animations/reveal.css" layer(animations);
+@import "./animations/text-reveal.css" layer(animations);
+
+/* 6. Pages -------------------------------------------------------------- */
+@import "./pages/home.css" layer(pages);
+@import "./pages/guia.css" layer(pages); /* templates/page-guia.php */
+
+/* 7. Utilities ---------------------------------------------------------- */
+@import "./utilities/helpers.css" layer(utilities);
+@import "./utilities/debug.css" layer(utilities); /* overlay del grid: solo actúa con <html data-grid-overlay> */

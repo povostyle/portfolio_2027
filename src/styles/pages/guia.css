@@ -1,0 +1,68 @@
+/*
+ * Guía de maquetación (templates/page-guia.php). Página de referencia interna.
+ * Excepción a la regla de scope por [data-page]: el slug de la página lo elige quien la crea,
+ * así que el scope es la clase .guide.
+ */
+.guide {
+  .section {
+    padding-block: var(--space-9);
+  }
+
+  h4 {
+    margin-block-start: var(--space-3);
+    font-size: var(--text-base);
+  }
+}
+
+.guide__pattern {
+  border-block-start: 1px solid var(--color-line);
+}
+
+.guide__head {
+  margin-block-end: var(--space-7);
+}
+
+.guide__demo {
+  /* Para que el lateral fijo tenga recorrido */
+  min-height: 0;
+}
+
+/* Bloque de relleno: muestra el espacio que ocuparía una imagen */
+.guide .ph {
+  display: grid;
+  place-items: center;
+  aspect-ratio: var(--ar, 4/3);
+  background: var(--color-bg-alt);
+  color: var(--color-ink-muted);
+  font: var(--weight-medium) var(--text-xs) / 1 var(--font-mono);
+
+  &.ph--fill {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 20rem;
+  }
+}
+
+.guide figure {
+  margin: 0;
+}
+
+.guide__code {
+  margin-block-start: var(--space-6);
+
+  summary {
+    cursor: pointer;
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  pre {
+    margin-block-start: var(--space-3);
+    padding: var(--space-5);
+    overflow-x: auto;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    font: var(--text-xs) / 1.6 var(--font-mono);
+    tab-size: 2;
+  }
+}

@@ -1,0 +1,22 @@
+---
+/**
+ * Página estándar: Base + cabecera + menú móvil + pie.
+ * Las páginas de src/pages/ usan este layout y solo componen blocks.
+ */
+import Base from "./Base.astro";
+import Header from "../components/layout/Header.astro";
+import Menu from "../components/layout/Menu.astro";
+import Footer from "../components/layout/Footer.astro";
+
+import type { Props as BaseProps } from "./Base.astro";
+type Props = BaseProps;
+const props = Astro.props;
+---
+<Base {...props}>
+  <Fragment slot="chrome">
+    <Header />
+    <Menu />
+  </Fragment>
+  <slot />
+  <Footer slot="after-main" />
+</Base>

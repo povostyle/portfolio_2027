@@ -1,0 +1,68 @@
+/* html, body y estados globales que no son de ningún componente. */
+html {
+  background: var(--color-bg);
+}
+
+/*
+ * Escalado proporcional por encima de 1440px (modo pantalla completa).
+ * 1rem = 16px a 1440px y crece con la pantalla: letras, espacios y radios
+ * mantienen la misma proporción con las columnas. Las media queries no cambian.
+ */
+@media (min-width: 90em) {
+  html {
+    font-size: calc(100vw / 90);
+  }
+}
+
+body {
+  overflow-x: clip;
+}
+
+/* Viewport vars escritas por scripts/core/viewport.js */
+:root {
+  --vh: 1vh;
+  --scrollbar-width: 0px;
+}
+
+::selection {
+  background: var(--color-selection);
+  color: var(--color-on-selection);
+}
+
+/* Secciones con tema (dark | accent): aplican sus tokens a fondo y texto */
+[data-theme] {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Lenis (lo crea Locomotive Scroll). Equivale a locomotive-scroll/dist/locomotive-scroll.css 5.0.x */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis :is([data-lenis-prevent], [data-lenis-prevent-wheel], [data-lenis-prevent-touch]) {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+/* Contenedor de Swup: todo lo que se sustituye entre páginas */
+#swup {
+  position: relative;
+}

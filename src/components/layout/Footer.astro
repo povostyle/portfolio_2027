@@ -1,0 +1,24 @@
+---
+/** Footer. CSS: styles/layout/footer.css */
+import { site } from "../../data/site";
+import { footer } from "../../data/nav";
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="h4">{site.name}</p>
+        {site.tagline && <p class="u-text-muted">{site.tagline}</p>}
+      </div>
+      <div class="u-flow">
+        {site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}
+        {site.phone && <p><a href={`tel:${site.phone.replace(/\s+/g, "")}`}>{site.phone}</a></p>}
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© {year} {site.name}</p>
+      {footer.map((item) => <p><a href={item.url}>{item.title}</a></p>)}
+    </div>
+  </div>
+</footer>

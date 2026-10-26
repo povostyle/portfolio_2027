@@ -1,0 +1,72 @@
+/*
+ * Paleta + roles semánticos — identidad de Miguel Ángel Poyatos.
+ * Regla: los componentes consumen SOLO los semánticos (--color-bg, --color-ink…).
+ *
+ * Contrastes medidos (WCAG):
+ *   navy sobre blanco 17,9 · navy sobre lima 16,6 · lima sobre navy 16,6
+ *   texto apagado rgba(17,17,24,.6) sobre blanco 4,9 · sobre lima 4,8 (vale para texto normal)
+ *   navy 75 % sobre blanco 8,1 · blanco 70 % sobre navy 9,1
+ *   lima sobre blanco 1,08 → el lima NUNCA es texto sobre fondo claro. Solo fondo, o texto sobre navy.
+ *   línea sobre blanco 1,9 → decorativa. Bordes de formulario con --color-line-strong.
+ */
+:root {
+  /* Literales ------------------------------------------------------------ */
+  --palette-white: #fff;
+  --palette-navy: #001733;
+  --palette-navy-900: #000d1f;      /* superficie alternativa en oscuro */
+  --palette-lime: #ebffb1;
+  --palette-lime-50: #f6ffe0;
+  --palette-gray-100: #f3f4f6;
+  --palette-gray-400: #b8bec8;
+  --palette-muted: rgb(17 17 24 / 60%);
+
+  /* Semánticos ----------------------------------------------------------- */
+  --color-bg: var(--palette-white);
+  --color-bg-alt: var(--palette-gray-100);
+  --color-bg-accent: var(--palette-lime-50);
+
+  --color-ink: var(--palette-navy);
+  --color-ink-soft: rgb(0 23 51 / 75%);
+  --color-ink-muted: var(--palette-muted);
+
+  --color-line: var(--palette-gray-400);
+  --color-line-strong: rgb(0 23 51 / 55%);
+
+  --color-primary: var(--palette-navy);
+  --color-on-primary: var(--palette-white);
+  --color-accent: var(--palette-lime);
+  --color-on-accent: var(--palette-navy);
+  --color-signal: var(--palette-lime);
+  --color-on-signal: var(--palette-navy);
+
+  --color-focus: var(--palette-navy);
+  --color-selection: var(--palette-lime);
+  --color-on-selection: var(--palette-navy);
+
+  --shadow-soft:
+    0 24px 14px rgb(0 23 51 / 2%), 0 11px 11px rgb(0 23 51 / 3%),
+    0 3px 6px rgb(0 23 51 / 3%);
+}
+
+/* <section data-theme="dark">: fondo navy. Aquí el lima sí es color de texto y de botón. */
+[data-theme="dark"] {
+  --color-bg: var(--palette-navy);
+  --color-bg-alt: var(--palette-navy-900);
+  --color-bg-accent: var(--palette-navy-900);
+  --color-ink: var(--palette-white);
+  --color-ink-soft: rgb(255 255 255 / 75%);
+  --color-ink-muted: rgb(255 255 255 / 60%);
+  --color-line: rgb(255 255 255 / 20%);
+  --color-line-strong: rgb(255 255 255 / 55%);
+  --color-primary: var(--palette-lime);
+  --color-on-primary: var(--palette-navy);
+  --color-focus: var(--palette-lime);
+}
+
+/* <section data-theme="accent">: fondo lima, texto navy. */
+[data-theme="accent"] {
+  --color-bg: var(--palette-lime);
+  --color-bg-alt: var(--palette-lime-50);
+  --color-ink-muted: rgb(17 17 24 / 60%);
+  --color-line: rgb(0 23 51 / 25%);
+}

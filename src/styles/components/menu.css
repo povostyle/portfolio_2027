@@ -1,0 +1,80 @@
+/*
+ * Menú móvil a pantalla completa. Comportamiento: scripts/components/menu.js
+ * Estados: html.is-menu-open
+ */
+.menu-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+
+  @media (min-width: 64em) {
+    display: none;
+  }
+}
+
+.menu-toggle__bar {
+  display: block;
+  width: 1.375rem;
+  height: 2px;
+  background: currentcolor;
+  transition: transform var(--transition-base), opacity var(--transition-fast);
+
+  & + & {
+    margin-block-start: 5px;
+  }
+
+  html.is-menu-open & {
+    &:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    &:nth-child(2) { opacity: 0; }
+    &:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  background: var(--color-bg);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    visibility 0s var(--dur-base);
+
+  html.is-menu-open & {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+}
+
+.menu__list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.menu__link {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  transform: translateY(1.5rem);
+  opacity: 0;
+  transition:
+    transform var(--transition-slow),
+    opacity var(--transition-slow);
+  transition-delay: calc(var(--index, 0) * 60ms);
+
+  html.is-menu-open & {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+html.is-menu-open {
+  overflow: hidden;
+}

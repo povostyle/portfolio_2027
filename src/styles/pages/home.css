@@ -1,0 +1,7 @@
+/*
+ * Overrides que solo existen en la home. Scope obligatorio por [data-page].
+ * Si algo de aquí se repite en otra página, es un componente: moverlo.
+ */
+[data-page="home"] {
+  /* .hero { … } */
+}

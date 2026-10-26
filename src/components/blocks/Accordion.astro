@@ -1,0 +1,24 @@
+---
+/**
+ * Acordeón: <bc-accordion> sobre <details> nativo.
+ * CSS: styles/components/accordion.css   JS: scripts/components/accordion.js
+ * content es HTML de confianza (escrito en el proyecto o de un CMS propio).
+ */
+import Icon from "../ui/Icon.astro";
+
+interface Item { title: string; content: string; open?: boolean }
+interface Props { items: Item[]; single?: boolean }
+const { items, single = false } = Astro.props;
+const group = `acc-${Math.random().toString(36).slice(2, 8)}`;
+---
+<bc-accordion class="accordion" single={single || undefined}>
+  {items.map((item) => (
+    <details class="accordion__item" name={single ? group : undefined} open={item.open || undefined}>
+      <summary class="accordion__trigger">
+        <span>{item.title}</span>
+        <Icon name="plus" class="accordion__icon" />
+      </summary>
+      <div class="accordion__content u-flow" set:html={item.content} />
+    </details>
+  ))}
+</bc-accordion>

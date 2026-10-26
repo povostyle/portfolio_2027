@@ -1,0 +1,20 @@
+/*
+ * Transición entre páginas (Swup). Clases que pone Swup en <html>:
+ *   is-changing  → durante toda la transición
+ *   is-animating → fase de salida (fade out) y primeros ms de entrada
+ *   is-rendering → mientras se sustituye el DOM
+ * Y la propia: is-ready → primera carga terminada (loader retirado)
+ */
+.transition-fade {
+  transition: opacity var(--dur-page) var(--ease-out);
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+/* Estado inicial antes de que el JS arranque: nada oculto si el JS falla */
+html:not(.is-ready) .transition-fade {
+  opacity: 1;
+}
