@@ -1,0 +1,29 @@
+/* Texto largo de Markdown. Vista: components/blocks/Prose.astro */
+.prose {
+    --flow-space: var(--space-5);
+    font-size: var(--text-base);
+    line-height: var(--leading-loose);
+
+    & h2 {
+        --flow-space: var(--space-9);
+        font-size: var(--text-xl);
+        line-height: var(--leading-snug);
+    }
+
+    & p+p {
+        --flow-space: var(--space-4);
+    }
+
+    & img {
+        --flow-space: var(--space-8);
+        display: block;
+        inline-size: 100%;
+        block-size: auto;
+        border-radius: var(--radius-md);
+    }
+
+    & a {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+}

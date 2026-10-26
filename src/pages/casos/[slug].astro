@@ -1,0 +1,51 @@
+---
+/** Página de caso (≡ single-casos.php). CSS: styles/pages/caso.css */
+import { getCollection, render } from "astro:content";
+import Page from "@layouts/Page.astro";
+import PageHeader from "@components/blocks/PageHeader.astro";
+import Image from "@components/ui/Image.astro";
+import Prose from "@components/blocks/Prose.astro";
+
+export async function getStaticPaths() {
+  const casos = await getCollection("casos");
+  return casos.map((caso) => ({ params: { slug: caso.id }, props: { caso } }));
+}
+
+const { caso } = Astro.props;
+const d = caso.data;
+const { Content } = await render(caso);
+---
+
+<Page page="caso" title={d.cliente} description={d.problema}>
+  <PageHeader eyebrow={`${d.sector} · ${d.anio}`} title={d.cliente} />
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <div class="grid">
+        <Image src={d.imagen} alt={d.imagenAlt} class="col-full" sizes="100vw" loading="eager" />
+
+        <dl class="caso__meta start-3 end-11 md-start-1 md-end-9">
+          <div><dt>Papel</dt><dd>{d.papel}</dd></div>
+          {
+            d.url && (
+              <div>
+                <>
+                  <dt>Web</dt>
+                  <dd>
+                    <a href={d.url} target="_blank" rel="noopener">
+                      Visitar
+                    </a>
+                  </dd>
+                </>
+              </div>
+            )
+          }
+        </dl>
+
+        <Prose class="start-4 end-10 md-start-1 md-end-8">
+          <Content />
+        </Prose>
+      </div>
+    </div>
+  </section>
+</Page>

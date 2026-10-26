@@ -36,6 +36,7 @@
 @import "./components/page-header.css" layer(components);
 @import "./components/post-card.css" layer(components);
 @import "./components/loader.css" layer(components);
+@import "./components/prose.css" layer(components);
 
 /* 5. Animations --------------------------------------------------------- */
 @import "./animations/transitions.css" layer(animations);
@@ -44,8 +45,10 @@
 
 /* 6. Pages -------------------------------------------------------------- */
 @import "./pages/home.css" layer(pages);
-@import "./pages/guia.css" layer(pages); /* templates/page-guia.php */
+@import "./pages/guia.css" layer(pages);
+/* templates/page-guia.php */
 
 /* 7. Utilities ---------------------------------------------------------- */
 @import "./utilities/helpers.css" layer(utilities);
-@import "./utilities/debug.css" layer(utilities); /* overlay del grid: solo actúa con <html data-grid-overlay> */
+@import "./utilities/debug.css" layer(utilities);
+/* overlay del grid: solo actúa con <html data-grid-overlay> */

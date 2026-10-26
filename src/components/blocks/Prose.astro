@@ -1,0 +1,11 @@
+---
+/** Texto largo que viene de Markdown. CSS: styles/components/prose.css */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class:list={["prose u-flow", className]}>
+  <slot />
+</div>
