@@ -90,3 +90,24 @@ import PageHeader from "../components/blocks/PageHeader.astro";
 - `npm run build` sin errores ni avisos de tipos.
 - Probado navegando con Swup (ir y volver), en móvil y con «reducir movimiento».
 - Ningún selector de JS por clase. Ningún ScrollTrigger sin `destroy()`.
+- Ejecuta tú el build; si falla, la tarea no está terminada.
+- Dime **qué archivos tocaste** y **qué decisiones tomaste que no te pedí**.
+- Antes de un commit: `/review`.
+
+## Mínimos de accesibilidad
+
+- Un solo `h1` por página y encabezados sin saltos (`h2` → `h3`, nunca `h2` → `h4`).
+- `button` para acciones, `a` para navegar. Un `div` con un clic es un error.
+- Foco visible siempre (`:focus-visible` del núcleo). Nunca `outline: none` sin alternativa.
+- Contraste AA: usar los tokens semánticos, que ya están medidos. El color de acento nunca es texto sobre fondo claro.
+- Formularios: `label` real (el placeholder no es una etiqueta); errores asociados con `aria-describedby`.
+- Áreas táctiles de al menos 44 × 44 px (`2.75rem`).
+- Imágenes con `alt` (vacío si son decorativas) y con dimensiones.
+- «Reducir movimiento» lo resuelve el núcleo: no saltárselo con animaciones propias.
+
+## Reglas aprendidas
+
+Cuando Miguel Ángel te corrija **dos veces por lo mismo**, propón añadir aquí una línea: qué pasó → regla.
+Lo que esté en esta sección manda sobre lo anterior. Si una regla deja de tener sentido, se quita, no se acumula.
+
+- (vacío)
